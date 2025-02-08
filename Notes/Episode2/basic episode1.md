@@ -80,4 +80,16 @@ console.log(document.getElementById(`root`));
 - **root.render**: This function is used to render a React element into the root.
 - **Event Handling**: The `onClick` property is used to handle click events on the button. When the button is clicked, the `btn` function is executed.
 - **Conditional Rendering**: The `btn` function toggles the rendering between two different React elements (`parent` and `heading`) based on the `clicked` state.
+
+## Parcel Notes
+
+- **Dev Build**: Parcel provides a development build that is optimized for fast rebuilds and debugging.
+- **Local Server**: Parcel includes a local development server that automatically reloads your app when you make changes.
+- **HMR (Hot Module Replacement)**: Parcel supports hot module replacement, allowing you to see changes instantly without refreshing the page.
+- **File Watching Algorithm**: Parcel uses a file watching algorithm written in C++ for efficient file change detection.
+- **Caching**: Parcel caches previously built assets to speed up subsequent builds.
+- **Image Optimization**: Parcel optimizes images to reduce their size and improve load times.
+- **Minification**: Parcel minifies your code to reduce file size and improve performance.
+- **Bundling**: Parcel bundles your code and assets into a single file or a set of files for efficient delivery.
+- **Compressing Your Files**: Parcel compresses your files to reduce their size and improve load times.
 ```
