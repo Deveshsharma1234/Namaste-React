@@ -1,0 +1,23 @@
+/* Navbar.css */
+
+#navbar {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid #ccc;
+    background-color: #333;
+    overflow: hidden;
+}
+#nav-links {
+    display: flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center  ;
+}
+
+
+
