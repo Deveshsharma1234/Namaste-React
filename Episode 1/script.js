@@ -19,6 +19,8 @@ const parent = React.createElement(`div`,{id : "parent"},React.createElement(`di
 const button = React.createElement(`button`,{id:"btn" ,onClick :btn},`click me`);
 const root2 = ReactDOM.createRoot(document.getElementById(`root2`));
 
+const jsxHeading = <h1>Namaste react in jsx</h1>;
+console.log(jsxHeading);
 
 const heading = React.createElement(`h1`,{id : "heading"},`Hello,Dojo!`);
 const root = ReactDOM.createRoot(document.getElementById(`root`));
