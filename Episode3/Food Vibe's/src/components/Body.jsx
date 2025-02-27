@@ -1,42 +1,75 @@
-import ReastrauntCard from './RestrauntCard';4
+
+import RestaurantCard from "./RestaurantCard";
 import { useState } from 'react';
+import{useEffect} from 'resct';
 
 import resList from '../utils/mockData';
 
 
 const Body = () => {
-  const [topRated, setTopRated] = useState(false);
   
+  let [filteredList,setFilteredResList] = useState( resList);
+  let [search , setSearch] = useState('The Fusion Lounge');
+  console.log(filteredList);
+  useEffect(()=>{
+    console.log("useEffect called");
+  })
+
  
+  
+  const filter = ()=>{
+    console.log("Button clicked");  
+    const listFilter = resList.filter(res => res.info.avgRating >4);
+    console.log("Filtered List:", listFilter);
+    setFilteredResList(listFilter);
+  }
+ const searchRestraunt = ()=>{
+    console.log("Button clicked");
+    const searchFilter = resList.filter(res => res.info.name.toLowerCase().includes(search.toLowerCase()));
+    console.log("Filtered List:", searchFilter);
+    setFilteredResList(searchFilter);
+ }
+const handleInputChange = (e)=>{
+  console.log(e.target.value);
+  
+  if(e.target.value ==="")
+    setFilteredResList(resList);
+  setSearch(e.target.value);
+
+}
 
   return (
     <div className="body">
       <div className="search-bar">
-        <input type="text" name="" id="" />
-        <button type="button">search</button>
+        <input type="text" name="" id=""   onChange={handleInputChange}/>
+        <button type="button" onClick={searchRestraunt}>search</button>
         <div className="filter">
-          <button type="button" className='filter-btn' onClick={()=>{
-        console.log  ( "Button clickeds")
-        // setTopRated = !topRated;
-        resList = resList.filter((res)=>res.info.avgRating > 4);
-        console.log(resList);
-          }}>Top-Rated-Restraunt</button>
+          <button type="button" className='filter-btn' onClick={ filter
+       /*   ()=>{
+              console.log  ( "Button clickeds")
+             
+               let listfilter  =  [...resList].filter((res)=>res.info.avgRating > 4);
+              console.log(listfilter);
+              setFilteredResList(listfilter);
+                }*/
+                
+          }>Top-Rated-Restraunt</button>
 
         </div>
       </div>
 
 
       <div className="res-container">
-        {  resList.map((res) => {
+        {  filteredList.map((res) => {
           return (
-            <ReastrauntCard
+            <RestaurantCard
               key={res.info.id}
               restData={res}
             />
           )
 
         })}
-        {
+        {/* {
           resList.filter((res) =>
             res.info.avgRating > 4).map((rs) => {
               return (
@@ -46,7 +79,7 @@ const Body = () => {
                 />
               )
             })
-        }
+        } */}
 
 
         {/* <ReastrauntCard
@@ -152,4 +185,84 @@ const Body = () => {
 
 
 
-export default Body;
+export default Body;  
+
+
+// import RestaurantCard from './RestaurantCard';
+// import { useState } from 'react';
+// import resList from '../utils/mockData';
+
+// const Body = () => {
+//   const [filteredList, setFilteredList] = useState(resList);
+
+//   const handleFilter = () => {
+//     console.log("Button clicked");
+//     const listFilter = resList.filter((res) => res.info.avgRating > 4);
+//     setFilteredList(listFilter);
+//   };
+
+//   return (
+//     <div className="body">
+//       <div className="search-bar">
+//         <input type="text" placeholder="Search for a restaurant..." />
+//         <button type="button">Search</button>
+//         <div className="filter">
+//           <button type="button" className="filter-btn" onClick={handleFilter}>
+//             Top-Rated Restaurants
+//           </button>
+//         </div>
+//       </div>
+
+//       <div className="res-container">
+//         {filteredList.length > 0 ? (
+//           filteredList.map((res) => (
+//             <RestaurantCard key={res.info.id} restData={res} />
+//           ))
+//         ) : (
+//           <p>No restaurants found</p>
+//         )}
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default Body;
+// import { useState } from "react";
+// import RestaurantCard from "./RestaurantCard";
+// import resList from "../utils/mockData";
+
+// const Body = () => {
+//   const [allRestaurants, setAllRestaurants] = useState(resList); // Store original data
+//   const [filteredList, setFilteredList] = useState(resList);
+
+//   const handleFilter = () => {
+//     console.log("Button clicked"); // Debugging
+//     const listFilter = allRestaurants.filter((res) => res.info.avgRating > 4);
+//     console.log("Filtered List:", listFilter); // Check if filtering works
+//     setFilteredList(listFilter);
+//   };
+
+//   return (
+//     <div className="body">
+//       <div className="search-bar">
+//         <input type="text" placeholder="Search for a restaurant..." />
+//         <button type="button">Search</button>
+//         <div className="filter">
+//           <button type="button" className="filter-btn" onClick={handleFilter}>
+//             Top-Rated Restaurants
+//           </button>
+//         </div>
+//       </div>
+
+//       <div className="res-container">
+//         {filteredList.length > 0 ? (
+//           filteredList.map((res) => <RestaurantCard key={res.info.id} restData={res} />)
+//         ) : (
+//           <p>No restaurants found</p>
+//         )}
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default Body;

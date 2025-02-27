@@ -1,189 +1,6 @@
 let resList =  [
-    {
-      "info": {
-        "id": "151656",
-        "name": "Dev International",
-        "cloudinaryImageId": "enj3srsnhbltbom2ovvh",
-        "locality": "khajri road",
-        "areaName": "Mohan Nagar",
-        "costForTwo": "₹100 for two",
-        "cuisines": [
-          "North Indian",
-          "Chinese",
-          "Fast Food",
-          "Beverages"
-        ],
-        "avgRating": 4.3,
-        "parentId": "71556",
-        "avgRatingString": "4.3",
-        "totalRatingsString": "451",
-        "sla": {
-          "deliveryTime": 57,
-          "lastMileTravel": 11.7,
-          "serviceability": "SERVICEABLE",
-          "slaString": "55-60 mins",
-          "lastMileTravelString": "11.7 km",
-          "iconType": "ICON_TYPE_EMPTY"
-        },
-        "availability": {
-          "nextCloseTime": "2025-02-21 22:30:00",
-          "opened": true
-        },
-        "badges": {
-          
-        },
-        "isOpen": true,
-        "type": "F",
-        "badgesV2": {
-          "entityBadges": {
-            "imageBased": {
-              
-            },
-            "textBased": {
-              
-            },
-            "textExtendedBadges": {
-              
-            }
-          }
-        },
-        "aggregatedDiscountInfoV3": {
-          "header": "₹125 OFF",
-          "subHeader": "ABOVE ₹349",
-          "discountTag": "FLAT DEAL"
-        },
-        "differentiatedUi": {
-          "displayType": "ADS_UI_DISPLAY_TYPE_ENUM_DEFAULT",
-          "differentiatedUiMediaDetails": {
-            "lottie": {
-              
-            },
-            "video": {
-              
-            }
-          }
-        },
-        "reviewsSummary": {
-          
-        },
-        "displayType": "RESTAURANT_DISPLAY_TYPE_DEFAULT",
-        "restaurantOfferPresentationInfo": {
-          
-        },
-        "externalRatings": {
-          "aggregatedRating": {
-            "rating": "--"
-          }
-        },
-        "ratingsDisplayPreference": "RATINGS_DISPLAY_PREFERENCE_SHOW_SWIGGY"
-      },
-      "analytics": {
-        "context": "seo-data-2bc9af01-e195-44ab-98a3-d9503462eed9"
-      },
-      "cta": {
-        "link": "https://www.swiggy.com/city/chhindwara/dev-international-khajri-road-mohan-nagar-rest151656",
-        "type": "WEBLINK"
-      }
-    },
-    {
-      "info": {
-        "id": "151649",
-        "name": "Hotel Sai Nath & Sai Restaurant",
-        "cloudinaryImageId": "vkhcohhmqfczycw9vsar",
-        "locality": "railway station",
-        "areaName": "Chhindwara Locality",
-        "costForTwo": "₹200 for two",
-        "cuisines": [
-          "North Indian",
-          "South Indian",
-          "Chinese",
-          "Beverages",
-          "Fast Food",
-          "Desserts"
-        ],
-        "avgRating": 4.3,
-        "veg": true,
-        "parentId": "101802",
-        "avgRatingString": "4.3",
-        "totalRatingsString": "964",
-        "sla": {
-          "deliveryTime": 47,
-          "lastMileTravel": 10.3,
-          "serviceability": "SERVICEABLE",
-          "slaString": "45-50 mins",
-          "lastMileTravelString": "10.3 km",
-          "iconType": "ICON_TYPE_EMPTY"
-        },
-        "availability": {
-          "nextCloseTime": "2025-02-21 22:30:00",
-          "opened": true
-        },
-        "badges": {
-          "imageBadges": [
-            {
-              "imageId": "v1695133679/badges/Pure_Veg111.png",
-              "description": "pureveg"
-            }
-          ]
-        },
-        "isOpen": true,
-        "aggregatedDiscountInfoV2": {
-          
-        },
-        "type": "F",
-        "badgesV2": {
-          "entityBadges": {
-            "imageBased": {
-              "badgeObject": [
-                {
-                  "attributes": {
-                    "description": "pureveg",
-                    "imageId": "v1695133679/badges/Pure_Veg111.png"
-                  }
-                }
-              ]
-            },
-            "textBased": {
-              
-            },
-            "textExtendedBadges": {
-              
-            }
-          }
-        },
-        "differentiatedUi": {
-          "displayType": "ADS_UI_DISPLAY_TYPE_ENUM_DEFAULT",
-          "differentiatedUiMediaDetails": {
-            "lottie": {
-              
-            },
-            "video": {
-              
-            }
-          }
-        },
-        "reviewsSummary": {
-          
-        },
-        "displayType": "RESTAURANT_DISPLAY_TYPE_DEFAULT",
-        "restaurantOfferPresentationInfo": {
-          
-        },
-        "externalRatings": {
-          "aggregatedRating": {
-            "rating": "--"
-          }
-        },
-        "ratingsDisplayPreference": "RATINGS_DISPLAY_PREFERENCE_SHOW_SWIGGY"
-      },
-      "analytics": {
-        "context": "seo-data-2bc9af01-e195-44ab-98a3-d9503462eed9"
-      },
-      "cta": {
-        "link": "https://www.swiggy.com/city/chhindwara/hotel-sai-nath-and-sai-restaurant-railway-station-chhindwara-locality-rest151649",
-        "type": "WEBLINK"
-      }
-    },
+  
+   
     {
       "info": {
         "id": "151518",
@@ -198,7 +15,7 @@ let resList =  [
           "Snacks",
           "Beverages"
         ],
-        "avgRating": 4.4,
+        "avgRating": 1.4,
         "veg": true,
         "parentId": "40363",
         "avgRatingString": "4.4",
@@ -297,7 +114,7 @@ let resList =  [
           "Fast Food",
           "Desserts"
         ],
-        "avgRating": 4.1,
+        "avgRating": 0.1,
         "parentId": "395453",
         "avgRatingString": "4.1",
         "totalRatingsString": "309",
@@ -666,7 +483,7 @@ let resList =  [
             "Fast Food",
             "Beverages"
           ],
-          "avgRating": 4.3,
+          "avgRating": 2.3,
           "parentId": "71556",
           "avgRatingString": "4.3",
           "totalRatingsString": "451",
@@ -1210,7 +1027,7 @@ let resList =  [
             "Momos",
             "Chinese"
           ],
-          "avgRating": 4.2,
+          "avgRating": 2.2,
           "veg": true,
           "parentId": "129345",
           "avgRatingString": "4.2",
@@ -1324,7 +1141,7 @@ let resList =  [
             "Indian",
             "Chinese"
           ],
-          "avgRating": 4,
+          "avgRating": 0,
           "veg": true,
           "parentId": "368432",
           "avgRatingString": "4.0",
