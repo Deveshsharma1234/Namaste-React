@@ -1,31 +1,48 @@
 
 import RestaurantCard from "./RestaurantCard";
 import { useState } from 'react';
-import{useEffect} from 'resct';
-
-import resList from '../utils/mockData';
+import{useEffect} from 'react';
+import Shimmer from "./Shimmer";
+// import resList from '../utils/mockData';
 
 
 const Body = () => {
-  
-  let [filteredList,setFilteredResList] = useState( resList);
-  let [search , setSearch] = useState('The Fusion Lounge');
-  console.log(filteredList);
-  useEffect(()=>{
-    console.log("useEffect called");
-  })
+  const [originalData ,setOriginalData] = useState([]); 
+    let [filteredList,setFilteredResList] = useState( []);
+    
+    let [search , setSearch] = useState("");
+    console.log(filteredList);
+    useEffect(()=>{
+      console.log("useEffect called");
+      fetchData();
+      setFilteredResList(originalData);
+    },[])
+    const fetchData = async()=>{
+      // const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=21.99740&lng=79.00110&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
+      const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=25.1249388&lng=75.8654596&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
+      const resJson = await data.json();
+      console.log(resJson);
+      const dataOriginal = resJson?.data?.cards
+        ?.map((card) => card?.card?.card?.gridElements?.infoWithStyle?.restaurants)
+        ?.find((list) => Array.isArray(list)) || [];
+        setOriginalData(dataOriginal);
+        setFilteredResList(dataOriginal);
+        
+
+    }
+
 
  
   
   const filter = ()=>{
     console.log("Button clicked");  
-    const listFilter = resList.filter(res => res.info.avgRating >4);
+    const listFilter = originalData.filter(res => res.info.avgRating >4.3);
     console.log("Filtered List:", listFilter);
     setFilteredResList(listFilter);
   }
  const searchRestraunt = ()=>{
     console.log("Button clicked");
-    const searchFilter = resList.filter(res => res.info.name.toLowerCase().includes(search.toLowerCase()));
+    const searchFilter = filteredList.filter(res => res.info.name.toLowerCase().includes(search.toLowerCase()));
     console.log("Filtered List:", searchFilter);
     setFilteredResList(searchFilter);
  }
@@ -33,10 +50,18 @@ const handleInputChange = (e)=>{
   console.log(e.target.value);
   
   if(e.target.value ==="")
-    setFilteredResList(resList);
+    setFilteredResList(originalData);
   setSearch(e.target.value);
 
 }
+const loader = ()=>{
+if (originalData.length === 0) {
+  const shimmerElements = [];
+  for (let i = 0; i < 10; i++) {
+    shimmerElements.push(<Shimmer key={i} />);
+  }
+  return shimmerElements;
+}}
 
   return (
     <div className="body">
@@ -57,10 +82,13 @@ const handleInputChange = (e)=>{
 
         </div>
       </div>
+     
 
 
       <div className="res-container">
+      {loader()}
         {  filteredList.map((res) => {
+
           return (
             <RestaurantCard
               key={res.info.id}

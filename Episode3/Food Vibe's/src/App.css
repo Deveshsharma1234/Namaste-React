@@ -135,7 +135,126 @@ button {
   margin: 3px 0;
 }
 
-.res-rating {
+.res-rating{
   color: #ff9800;
   font-weight: bold;
 }
+/* Shimmer card css */
+
+.shimmer-wrapper {
+  width: 100%;
+  max-width: 300px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: #1e1e1e;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.shimmer-image {
+  width: 100%;
+  height: 180px;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #333 25%, #444 50%, #333 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite linear;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.shimmer-title,
+.shimmer-rating,
+.shimmer-cusine,
+.shimmer-price {
+  height: 14px;
+  border-radius: 5px;
+  background: linear-gradient(90deg, #333 25%, #444 50%, #333 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite linear;
+}
+
+.shimmer-title {
+  width: 80%;
+  height: 18px;
+}
+
+.shimmer-rating {
+  width: 50%;
+}
+
+.shimmer-cusine {
+  width: 70%;
+}
+
+.shimmer-price {
+  width: 40%;
+}
+
+@keyframes shimmer {
+  0% {
+      background-position: -200% 0;
+  }
+  100% {
+      background-position: 200% 0;
+  }
+}
+/* Login/logout butn */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #f8f9fa;
+  border-bottom: 2px solid #ddd;
+}
+
+.logo-container .logo {
+  width: 100px; /* Adjust as needed */
+}
+
+.nav-items ul {
+  display: flex;
+  list-style: none;
+  gap: 20px;
+}
+
+.nav-items li {
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.log {
+  display: flex;
+  align-items: center;
+}
+
+.log-btn {
+  height: 40px;
+  width: 100px;
+  border: 2px solid black;
+  border-radius: 10px;
+  background-color: rgb(199, 12, 12);
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.8s ease;
+}
+/* Green for Login */
+.login-btn {
+  background-color: green;
+  color: white;
+}
+
+/* Red for Logout */
+.logout-btn {
+  background-color: red;
+  color: white;
+}
+
