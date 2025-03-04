@@ -270,3 +270,42 @@ button {
   object-fit: cover;
   border-radius: 10px;
 }
+/* Res container heading */
+.res-container-heading {
+  width: 100%;
+  text-align: left;
+  margin-bottom: 20px;
+  margin-top: 30px;
+  margin-left:200px ;
+}
+
+.res-container-heading h2 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+}
+
+
+/* Error Page */
+.error {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 2px solid #f5c6cb;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.error h1 {
+  font-size: 48px;
+  margin-bottom: 10px;
+}
+
+.error h2 {
+  font-size: 24px;
+}

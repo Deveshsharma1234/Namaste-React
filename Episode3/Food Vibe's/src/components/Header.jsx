@@ -1,13 +1,25 @@
 import { LOGO_URL } from "../utils/constants";
-import{useState} from 'react';
-
+import{useState ,useEffect} from 'react';
+import { Link } from "react-router-dom";
 const Header =()=>{
 
 
   const [log,setLog]=useState("Login");
+ 
+
+  useEffect(()=>{
+  //  setCount(count+1) ;
+
+    console.log("Inside the use Effect of header")
+
+
+  },[]);
+
   const handleLoging =()=>{
     setLog(log==="Login"?"Logout":"Login");
   }
+
+
     return(
       <div className = "Header">
         <div className="logoContainer">
@@ -16,15 +28,17 @@ const Header =()=>{
   
         <div className="nav-items">
           <ul>
-            <li>Home</li>
-            <li>About-us</li>
-            <li>Contact</li>
-            <li>Cart</li>
+            <li><Link to={"/"}>Home</Link></li>
+            <li><Link to={"/about-us"}>About-us</Link></li>
+            <li><Link to={"/contact-us"}>Contact</Link></li>
+            <li><Link to={"/cart"}>Cart</Link></li>
           </ul>
         </div>
         <div className="log">
           <button className={`log-btn ${log==="Login"?"login-btn":"logout-btn"}`}
-           onClick={handleLoging}>{log}</button>
+           onClick={handleLoging}>
+            <Link to={"/about-us"}>{log}</Link>
+           </button>
         </div>
   
   

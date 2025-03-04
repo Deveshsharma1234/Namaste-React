@@ -9,12 +9,13 @@ import Shimmer from "./Shimmer";
 const Body = () => {
   const [originalData ,setOriginalData] = useState([]); 
     let [filteredList,setFilteredResList] = useState( []);
-    
     let [search , setSearch] = useState("");
+    const[res_name_heading, setRes_name_heading] = useState("Wait... ");
     console.log(filteredList);
     useEffect(()=>{
       console.log("useEffect called");
       fetchData();
+     
       // setFilteredResList(originalData);
     },[])
     const fetchData = async()=>{
@@ -27,9 +28,11 @@ const Body = () => {
         ?.find((list) => Array.isArray(list)) || [];
         setOriginalData(dataOriginal);
         setFilteredResList(dataOriginal);
+        setRes_name_heading(resJson?.data?.cards[2]?.card?.card?.title)
         
 
     }
+  
  
   const filter = ()=>{
     console.log("Button clicked");  
@@ -61,7 +64,7 @@ if (originalData.length === 0) {
 }}
 
   return (
-    <div className="body">s
+    <div className="body">
       <div className="search-bar">
         <input type="text" name="" id=""   onChange={handleInputChange}/>
         <button type="button" onClick={searchRestraunt}>search</button>
@@ -83,6 +86,9 @@ if (originalData.length === 0) {
 
 
       <div className="res-container">
+        <div className="res-container-heading">
+          <h2>{res_name_heading}</h2>
+        </div>
       {loader()}
         {  filteredList.map((res) => {
 
