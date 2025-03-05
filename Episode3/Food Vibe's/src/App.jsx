@@ -8,7 +8,7 @@ import Dogy from "./components/Dogy"
 import About from './pages/About'
 import Contact from './pages/Contact'
 import Error from './components/Error'
-
+import RestrauntsMenu from './pages/RestrauntsMenu'
 
 
 
@@ -46,6 +46,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/contact-us",
         element: <Contact/>
+      },
+      {
+        path:"/restraunts/:id",
+        element:<RestrauntsMenu/>
       }
 
     ],
