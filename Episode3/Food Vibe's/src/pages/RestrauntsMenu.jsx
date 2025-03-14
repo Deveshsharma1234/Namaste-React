@@ -3,10 +3,15 @@ import Shimmer from "../components/Shimmer";
 import { CDN_URL } from "../utils/constants";
 import { data } from "react-router-dom";
 
+import { useParams } from "react-router-dom";   
+import { MENU_API } from "../utils/constants";
+
 
 const RestrauntsMenu = () => {
     const [resInfo, setResInfo] = useState(null);
     const [search, setSearch] = useState("");
+    const{resId} = useParams();
+ 
 
 
     useEffect(() => {
@@ -18,7 +23,8 @@ const RestrauntsMenu = () => {
 
     const fetchMenu = async () => {
         //   let menu = await  fetch("https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=25.2138156&lng=75.8647527&restaurantId=466586&catalog_qa=undefined&submitAction=ENTER");
-        let menu = await fetch("https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=25.2138156&lng=75.8647527&restaurantId=713906&catalog_qa=undefined&submitAction=ENTER#");
+        // let menu = await fetch("https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=25.2138156&lng=75.8647527&restaurantId=713906&catalog_qa=undefined&submitAction=ENTER#");
+        let menu = await fetch(MENU_API+resId+"&catalog_qa=undefined&submitAction=ENTER");
         menu = await menu.json();
         console.log(menu);
         setResInfo(menu.data);
@@ -50,7 +56,7 @@ const RestrauntsMenu = () => {
     const offers = resInfo?.cards[3]?.card?.card?.gridElements?.infoWithStyle?.offers || [];
     const food = resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card;
     const categories = resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards || [];
-    //  console.log("Offers:", offers);
+   
     return (
         <div className="menu">
 
@@ -96,6 +102,7 @@ const RestrauntsMenu = () => {
                 <div className="search">
                     <input type="text" name="" id="" placeholder="Search for dishes" onChange={(e) => {
                         setSearch(e.target.value)
+                        console.log(search)
 
                     }} />
                     <button id="search-dish" onClick={() => {
@@ -124,6 +131,7 @@ const RestrauntsMenu = () => {
                                 {/* Left - Food Details */}
                                 <div className="menu-content">
                                     <h4 className="item-name">{item.card.info.name}</h4>
+                                    
                                     <div className="item-price">
                                         <span className="old-price">₹{(item.card.info.defaultPrice / 100).toFixed(2)}</span>
                                         <span className="new-price">₹{(item.card.info.price / 100).toFixed(2)}</span>

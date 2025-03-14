@@ -3,6 +3,8 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  text-decoration:  none;
+  color: black;
 }
 
 body {
@@ -92,6 +94,7 @@ button {
 
 /* Restaurant Card */
 .res-card {
+
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -104,6 +107,8 @@ button {
   height: 350px;  /* Fixed height for consistency */
   text-align: center;
   transition: transform 0.3s ease;
+  /* color: inherit; Inherits text color from parent */
+    text-decoration: none; /* Removes underline */
 }
 
 .res-card:hover {
@@ -633,8 +638,8 @@ button {
 }
 
 .menu-img {
-    width: 120px;
-    height: 120px;
+    width: 60px;
+    height: 60px;
     object-fit: cover;
     border-radius: 10px;
 }
@@ -659,4 +664,80 @@ button {
     font-size: 12px;
     color: gray;
     margin-top: 5px;
+}
+
+
+/*About us*/
+/* Contributer Section */
+.contributer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+}
+
+.contributer .user {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  width: 200px;
+  text-align: center;
+}
+
+.contributer .user h3 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.contributer .user p {
+  font-size: 14px;
+  color: #666;
+  margin: 3px 0;
+}
+/* User Card */
+.userCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  width: 200px;
+  text-align: center;
+}
+
+.userCard .img {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 10px;
+}
+
+.userCard .img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.userCard .info h2 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.userCard .info h3 {
+  font-size: 14px;
+  color: #666;
+  margin: 3px 0;
 }

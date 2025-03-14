@@ -3,6 +3,7 @@ import RestaurantCard from "./RestaurantCard";
 import { useState } from 'react';
 import{useEffect} from 'react';
 import Shimmer from "./Shimmer";
+import { Link } from "react-router-dom";
 // import resList from '../utils/mockData';
 
 
@@ -11,7 +12,8 @@ const Body = () => {
     let [filteredList,setFilteredResList] = useState( []);
     let [search , setSearch] = useState("");
     const[res_name_heading, setRes_name_heading] = useState("Wait... ");
-    console.log(filteredList);
+    // console.log(filteredList);
+    // console.log("HYYYYYYYYYYY"+useState);
     useEffect(()=>{
       console.log("useEffect called");
       fetchData();
@@ -93,10 +95,10 @@ if (originalData.length === 0) {
         {  filteredList.map((res) => {
 
           return (
-            <RestaurantCard
-              key={res.info.id}
-              restData={res}
-            />
+            <Link  key={res.info.id} to={"/restraunts/"+res.info.id}><RestaurantCard
+           
+            restData={res}
+          /></Link>
           )
 
         })}
