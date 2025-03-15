@@ -4,6 +4,7 @@ import { useState } from 'react';
 import{useEffect} from 'react';
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
+import { useLoader } from "../utils/useLoader";
 // import resList from '../utils/mockData';
 
 
@@ -56,14 +57,15 @@ const handleInputChange = (e)=>{
   setSearch(e.target.value);
 
 }
-const loader = ()=>{
-if (originalData.length === 0) {
-  const shimmerElements = [];
-  for (let i = 0; i < 10; i++) {
-    shimmerElements.push(<Shimmer key={i} />);
-  }
-  return shimmerElements;
-}}
+// const loader = ()=>{
+// if (originalData.length === 0) {
+//   const shimmerElements = [];
+//   for (let i = 0; i < 10; i++) {
+//     shimmerElements.push(<Shimmer key={i} />);
+//   }
+//   return shimmerElements;
+// }}
+const loader = useLoader(originalData.length);
 
   return (
     <div className="body">

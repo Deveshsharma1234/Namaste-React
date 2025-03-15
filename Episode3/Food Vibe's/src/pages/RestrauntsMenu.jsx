@@ -5,43 +5,58 @@ import { data } from "react-router-dom";
 
 import { useParams } from "react-router-dom";   
 import { MENU_API } from "../utils/constants";
+import { useRestrauntMenu } from "../utils/useRestrauntMenu";
+import { useLoader } from "../utils/useLoader";
+import { useOnlineStatus } from "../utils/useOnlineStatus";
 
 
 const RestrauntsMenu = () => {
-    const [resInfo, setResInfo] = useState(null);
+   
     const [search, setSearch] = useState("");
     const{resId} = useParams();
- 
 
-
-    useEffect(() => {
-        fetchMenu();
-        console.log(resInfo)
-
-
-    }, [])
-
-    const fetchMenu = async () => {
-        //   let menu = await  fetch("https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=25.2138156&lng=75.8647527&restaurantId=466586&catalog_qa=undefined&submitAction=ENTER");
-        // let menu = await fetch("https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=25.2138156&lng=75.8647527&restaurantId=713906&catalog_qa=undefined&submitAction=ENTER#");
-        let menu = await fetch(MENU_API+resId+"&catalog_qa=undefined&submitAction=ENTER");
-        menu = await menu.json();
-        console.log(menu);
-        setResInfo(menu.data);
-
-
+    const onlineStatus = useOnlineStatus();
+    if(!onlineStatus){
+        return(
+            <div>
+                <h1>You are offline Plese check you internet connection!!!</h1>
+            </div>
+        )
     }
-    const Loader = () => {
-        if (resInfo == null) {
-            const shimmerElement = [];
-            for (let index = 0; index < 10; index++) {
-                shimmerElement.push(<Shimmer key={index} />);
+    
+    
+    // const [resInfo, setResInfo] = useState(null);
 
-            }
-            return shimmerElement;
-        }
+    // useEffect(() => {
+    //     fetchMenu();
+    //     console.log(resInfo)
 
-    }
+
+    // }, [])
+
+    // const fetchMenu = async () => {
+    //     //   let menu = await  fetch("https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=25.2138156&lng=75.8647527&restaurantId=466586&catalog_qa=undefined&submitAction=ENTER");
+    //     // let menu = await fetch("https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=25.2138156&lng=75.8647527&restaurantId=713906&catalog_qa=undefined&submitAction=ENTER#");
+    //     let menu = await fetch(MENU_API+resId+"&catalog_qa=undefined&submitAction=ENTER");
+    //     menu = await menu.json();
+    //     console.log(menu);
+    //     setResInfo(menu.data);
+
+
+    // }
+    const resInfo = useRestrauntMenu(resId);//creatd custom hook
+    // const Loader = () => {
+    //     if (resInfo == null) {
+    //         const shimmerElement = [];
+    //         for (let index = 0; index < 10; index++) {
+    //             shimmerElement.push(<Shimmer key={index} />);
+
+    //         }
+    //         return shimmerElement;
+    //     }
+
+    // }
+    const Loader = useLoader(resInfo);//creatd custom hook
 
 
     if (!resInfo) {
@@ -51,6 +66,8 @@ const RestrauntsMenu = () => {
             </div>
         )
     }
+
+
 
     const { sla, areaName, city, name, costForTwoMessage, avgRatingString, totalRatingsString, cuisines } = resInfo?.cards[2]?.card?.card?.info || "no name available";
     const offers = resInfo?.cards[3]?.card?.card?.gridElements?.infoWithStyle?.offers || [];
