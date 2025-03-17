@@ -30,7 +30,8 @@ const Header =()=>{
   
         <div className="nav-items">
           <ul>
-            <li>Online Statue :{isOnline ? "😇": "😠"}</li>
+         
+            <li >Online Statue :{isOnline ? "😇": "😠"}</li>
             <li><Link to={"/"}>Home</Link></li>
             <li><Link to={"/about-us"}>About-us</Link></li>
             <li><Link to={"/contact-us"}>Contact</Link></li>
@@ -39,7 +40,7 @@ const Header =()=>{
           </ul>
         </div>
         <div className="log">
-          <button className={`log-btn ${log==="Login"?"login-btn":"logout-btn"}`}
+          <button className={`log-btn ${log==="Login"?"login-btn":"logout-btn"}`} 
            onClick={handleLoging}>
             <Link to={"/about-us"}>{log}</Link>
            </button>

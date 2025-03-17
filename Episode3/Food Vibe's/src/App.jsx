@@ -64,7 +64,12 @@ const appRouter = createBrowserRouter([
       {
         path:"/grocery",
         element :<Suspense fallback ={
-          <><Shimmer/></>
+        
+          <>
+          {[...Array(10)].map((_, index) => (
+            <Shimmer key={index} />
+          ))}
+        </>
         }> <Grocery/></Suspense>
 
       },
