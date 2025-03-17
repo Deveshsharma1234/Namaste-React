@@ -17,7 +17,7 @@ const About = () => {
 
 {
     [...Array(5)].map((_, index) => {
-        return <UserClass key={index} name={"deveshsharma1234"} location={"Jhalawar"} contactUs={"deveshsharma372002@gmail.com"} />;
+        return <UserClass key={index} name={"deveshsharma1234"} />;
     })
 }
 

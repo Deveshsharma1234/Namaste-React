@@ -2,7 +2,7 @@ const User =({img,name,location,contactUs})=>{
     return(
        <div className="userCard">
         <div className="img">
-            <img src="img" alt="" />
+            <img src={img} alt="" />
         </div>
         <div className="info">
             <h2>{name}</h2>

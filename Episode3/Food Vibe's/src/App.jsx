@@ -1,17 +1,20 @@
-import React from 'react'
+import React  ,{lazy,Suspense}from 'react'
 import ReactDOM from 'react-dom/client'
 import {createBrowserRouter, Outlet, RouterProvider} from 'react-router-dom'
 import './App.css'
 import Header from './components/Header'
 import Body from './components/Body'
 import Dogy from "./components/Dogy"
-import About from './pages/About'
+// import About from './pages/About'
 import Contact from './pages/Contact'
 import Error from './components/Error'
 import RestrauntsMenu from './pages/RestrauntsMenu'
+import Shimmer from './components/Shimmer'
+// import Grocery from './components/Grocery'
 
 
-
+const Grocery = lazy(()=>import("./components/Grocery"))
+const About = lazy(()=> import("./pages/About"))
 
 
 
@@ -41,7 +44,14 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "/about-us",
-        element:<About/>
+        element:<Suspense fallback ={
+          <>
+          Hi Wait for Getting data it is lazyily loaded
+          </>
+        }>
+          <About/>
+        
+        </Suspense>
       },
       {
         path: "/contact-us",
@@ -50,7 +60,14 @@ const appRouter = createBrowserRouter([
       {
         path:"/restraunts/:resId",
         element:<RestrauntsMenu/>
-      }
+      },
+      {
+        path:"/grocery",
+        element :<Suspense fallback ={
+          <><Shimmer/></>
+        }> <Grocery/></Suspense>
+
+      },
 
     ],
     errorElement:  <Error/>
