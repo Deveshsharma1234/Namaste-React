@@ -1,7 +1,7 @@
 
 import RestaurantCard from "./RestaurantCard";
 import { useState } from 'react';
-import{useEffect} from 'react';
+import { useEffect } from 'react';
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import { useLoader } from "../utils/useLoader";
@@ -9,210 +9,107 @@ import { useLoader } from "../utils/useLoader";
 
 
 const Body = () => {
-  const [originalData ,setOriginalData] = useState([]); 
-    let [filteredList,setFilteredResList] = useState( []);
-    let [search , setSearch] = useState("");
-    const[res_name_heading, setRes_name_heading] = useState("Wait... ");
-    // console.log(filteredList);
-    // console.log("HYYYYYYYYYYY"+useState);
-    useEffect(()=>{
-      console.log("useEffect called");
-      fetchData();
-     
-      // setFilteredResList(originalData);
-    },[])
-    const fetchData = async()=>{
-      // const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=21.99740&lng=79.00110&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
-      const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=25.1249388&lng=75.8654596&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
-      const resJson = await data.json();
-      console.log(resJson);
-      const dataOriginal = resJson?.data?.cards
-        ?.map((card) => card?.card?.card?.gridElements?.infoWithStyle?.restaurants)
-        ?.find((list) => Array.isArray(list)) || [];
-        setOriginalData(dataOriginal);
-        setFilteredResList(dataOriginal);
-        setRes_name_heading(resJson?.data?.cards[2]?.card?.card?.title)
-        
+  const [originalData, setOriginalData] = useState([]);
+  let [filteredList, setFilteredResList] = useState([]);
+  let [search, setSearch] = useState("");
+  const [res_name_heading, setRes_name_heading] = useState("Wait... ");
+  // console.log(filteredList);
+  // console.log("HYYYYYYYYYYY"+useState);
+  useEffect(() => {
+    console.log("useEffect called");
+    fetchData();
 
-    }
-  
- 
-  const filter = ()=>{
-    console.log("Button clicked");  
-    const listFilter = originalData.filter(res => res.info.avgRating >4.3);
+    // setFilteredResList(originalData);
+  }, [])
+  const fetchData = async () => {
+    // const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=21.99740&lng=79.00110&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
+    const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=25.1249388&lng=75.8654596&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING");
+    const resJson = await data.json();
+    console.log(resJson);
+    const dataOriginal = resJson?.data?.cards
+      ?.map((card) => card?.card?.card?.gridElements?.infoWithStyle?.restaurants)
+      ?.find((list) => Array.isArray(list)) || [];
+    setOriginalData(dataOriginal);
+    setFilteredResList(dataOriginal);
+    setRes_name_heading(resJson?.data?.cards[2]?.card?.card?.title)
+
+
+  }
+
+
+  const filter = () => {
+    console.log("Button clicked");
+    const listFilter = originalData.filter(res => res.info.avgRating > 4.3);
     console.log("Filtered List:", listFilter);
     setFilteredResList(listFilter);
   }
- const searchRestraunt = ()=>{
+  const searchRestraunt = () => {
     console.log("Button clicked");
     const searchFilter = filteredList.filter(res => res.info.name.toLowerCase().includes(search.toLowerCase()));
     console.log("Filtered List:", searchFilter);
     setFilteredResList(searchFilter);
- }
-const handleInputChange = (e)=>{
-  console.log(e.target.value);
-  
-  if(e.target.value ==="")
-    setFilteredResList(originalData);
-  setSearch(e.target.value);
+  }
+  const handleInputChange = (e) => {
+    console.log(e.target.value);
 
-}
-// const loader = ()=>{
-// if (originalData.length === 0) {
-//   const shimmerElements = [];
-//   for (let i = 0; i < 10; i++) {
-//     shimmerElements.push(<Shimmer key={i} />);
-//   }
-//   return shimmerElements;
-// }}
-const loader = useLoader(originalData.length);
+    if (e.target.value === "")
+      setFilteredResList(originalData);
+    setSearch(e.target.value);
+
+  }
+  // const loader = ()=>{
+  // if (originalData.length === 0) {
+  //   const shimmerElements = [];
+  //   for (let i = 0; i < 10; i++) {
+  //     shimmerElements.push(<Shimmer key={i} />);
+  //   }
+  //   return shimmerElements;
+  // }}
+  const loader = useLoader(originalData.length);
 
   return (
-    <div className="body">
-      <div className="search-bar">
-        <input type="text" name="" id=""   onChange={handleInputChange}/>
-        <button type="button" onClick={searchRestraunt}>search</button>
-        <div className="filter">
-          <button type="button" className='filter-btn' onClick={ filter
-       /*   ()=>{
-              console.log  ( "Button clickeds")
-             
-               let listfilter  =  [...resList].filter((res)=>res.info.avgRating > 4);
-              console.log(listfilter);
-              setFilteredResList(listfilter);
-                }*/
-                
-          }>Top-Rated-Restraunt</button>
-
-        </div>
+    <div className="p-6">
+      {/* Search & Filter Section */}
+      <div className="flex flex-col md:flex-row justify-center items-center gap-4 mb-6">
+        <input
+          type="text"
+          className="p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all w-full md:w-1/3"
+          placeholder="Search restaurants..."
+          onChange={handleInputChange}
+        />
+        <button
+          type="button"
+          onClick={searchRestraunt}
+          className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 active:bg-purple-800 transition-all"
+        >
+          Search
+        </button>
+        <button
+          type="button"
+          className="px-4 py-2 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300 active:bg-gray-400 transition-all"
+          onClick={filter}
+        >
+          Top-Rated Restaurants
+        </button>
       </div>
-     
-
-
+  
+      {/* Restaurant Cards Section */}
       <div className="res-container">
-        <div className="res-container-heading">
-          <h2>{res_name_heading}</h2>
+        <h2 className="text-2xl font-semibold text-gray-800 mb-4">{res_name_heading}</h2>
+  
+        {loader()}
+  
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {filteredList.map((res) => (
+            <Link key={res.info.id} to={`/restraunts/${res.info.id}`} className="block">
+              <RestaurantCard restData={res} />
+            </Link>
+          ))}
         </div>
-      {loader()}
-        {  filteredList.map((res) => {
-
-          return (
-            <Link  key={res.info.id} to={"/restraunts/"+res.info.id}><RestaurantCard
-           
-            restData={res}
-          /></Link>
-          )
-
-        })}
-        {/* {
-          resList.filter((res) =>
-            res.info.avgRating > 4).map((rs) => {
-              return (
-                <ReastrauntCard
-                  key={rs.info.id} 
-                  restData={rs}
-                />
-              )
-            })
-        } */}
-
-
-        {/* <ReastrauntCard
-          restData = {resList[0]}
-            />
-            <ReastrauntCard
-          restData = {resList[1]}
-            />
-            <ReastrauntCard
-          restData = {resList[3]}
-            />
-            <ReastrauntCard
-          restData = {resList[5]}
-            /> */}
-        {/* <ReastrauntCard 
-    img="https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg" 
-    name="Meghna Foods" 
-    cusine="Indian, Chinese, South Indian" 
-    rating="4.5" 
-    star="⭐⭐⭐⭐⭐"
-    avgPrice="₹200 for one" 
-  />
-         
-  <ReastrauntCard 
-    img="https://images.pexels.com/photos/262978/pexels-photo-262978.jpeg" 
-    name="Spicy Grill" 
-    cusine="BBQ, American, Steakhouse" 
-    rating="4.2" 
-    star="⭐⭐⭐⭐" 
-    avgPrice="₹350 for one" 
-  />
-  
-  
-  <ReastrauntCard 
-    img="https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg" 
-    name="The Italian Bistro" 
-    cusine="Italian, Pasta, Pizza" 
-    rating="4.6" 
-    star="⭐⭐⭐⭐⭐" 
-    avgPrice="₹400 for one" 
-  />
-  <ReastrauntCard 
-    img="https://www.foodiesfeed.com/wp-content/uploads/2023/12/cutting-pizza.jpg" 
-    name="Vegan Paradise" 
-    cusine="Vegan, Organic, Healthy" 
-    rating="4.3" 
-    star="⭐⭐⭐⭐" 
-    avgPrice="₹250 for one" 
-  />
-          <ReastrauntCard 
-    img="https://images.pexels.com/photos/1639564/pexels-photo-1639564.jpeg" 
-    name="Golden Dragon" 
-    cusine="Chinese, Thai, Asian" 
-    rating="4.7" 
-    star="⭐⭐⭐⭐⭐" 
-    avgPrice="₹300 for one" 
-  />
-  
-  <ReastrauntCard 
-    img="https://images.pexels.com/photos/262047/pexels-photo-262047.jpeg" 
-    name="Royal Biryani House" 
-    cusine="Indian, Mughlai, Biryani" 
-    rating="4.5" 
-    star="⭐⭐⭐⭐" 
-    avgPrice="₹250 for one" 
-  />
-  
-  <ReastrauntCard 
-    img="https://images.pexels.com/photos/6752433/pexels-photo-6752433.jpeg" 
-    name="Mexican Fiesta" 
-    cusine="Mexican, Tacos, Burritos" 
-    rating="4.6" 
-    star="⭐⭐⭐⭐⭐" 
-    avgPrice="₹350 for one" 
-  />
-  
-  <ReastrauntCard 
-    img="https://images.pexels.com/photos/1833349/pexels-photo-1833349.jpeg" 
-    name="Sunset Café" 
-    cusine="Café, Continental, Desserts" 
-    rating="4.4" 
-    star="⭐⭐⭐⭐" 
-    avgPrice="₹200 for one" 
-  />
-  
-  <ReastrauntCard 
-    img="https://images.pexels.com/photos/2087740/pexels-photo-2087740.jpeg" 
-    name="BBQ Nation" 
-    cusine="BBQ, Grilled, Smoked" 
-    rating="4.8" 
-    star="⭐⭐⭐⭐⭐" 
-    avgPrice="₹500 for one" 
-  /> */}
-
-
       </div>
     </div>
-  )
+  );
+  
 }
 
 
@@ -220,7 +117,7 @@ const loader = useLoader(originalData.length);
 
 
 
-export default Body;  
+export default Body;
 
 
 // import RestaurantCard from './RestaurantCard';
