@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import {createBrowserRouter, Outlet, RouterProvider} from 'react-router-dom'
 import './App.css'
 import Header from './components/Header'
-import Body from './components/Body'
+import Body from './pages/Body'
 import Dogy from "./components/Dogy"
 // import About from './pages/About'
 import Contact from './pages/Contact'

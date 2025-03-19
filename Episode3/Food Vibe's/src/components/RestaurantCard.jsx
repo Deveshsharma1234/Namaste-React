@@ -62,4 +62,18 @@ const RestaurantCard = ({ restData }) => {
   );
 };
 
+//Higher order fxn Returning updated restaurant card having Remomended on its
+export const withPromotedRestaurantCard = (RestaurantCard)=>{
+  return (props)=>{
+    console.log("withPromotedRestaurantCard called",withPromotedRestaurantCard  )
+    return<>
+    
+  <span className="absolute  bg-purple-600 text-white text-xs font-semibold px-2 py-1 rounded-md shadow-md">
+    Recommended
+  </span>
+  <RestaurantCard {...props} />
+    </>
+  }
+}
+
 export default RestaurantCard;

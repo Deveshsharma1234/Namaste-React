@@ -156,7 +156,7 @@ const RestrauntsMenu = () => {
                               <span className="line-through text-gray-500">₹{(item.card.info.defaultPrice / 100).toFixed(2)}</span>
                               <span className="text-green-600 font-bold">₹{(item.card.info.price / 100).toFixed(2)}</span>
                             </div>
-                            <p className="text-gray-600 text-sm">{item?.card?.info?.description}</p>
+                            <p className="text-gray-600 text-sm  line-clamp-3">{item?.card?.info?.description}</p>
                           </div>
       
                           {/* Image & Add Button */}

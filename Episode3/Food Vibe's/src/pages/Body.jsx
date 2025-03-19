@@ -1,8 +1,8 @@
 
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard, { withPromotedRestaurantCard } from "../components/RestaurantCard";
 import { useState } from 'react';
 import { useEffect } from 'react';
-import Shimmer from "./Shimmer";
+import Shimmer from "../components/Shimmer";
 import { Link } from "react-router-dom";
 import { useLoader } from "../utils/useLoader";
 // import resList from '../utils/mockData';
@@ -13,7 +13,7 @@ const Body = () => {
   let [filteredList, setFilteredResList] = useState([]);
   let [search, setSearch] = useState("");
   const [res_name_heading, setRes_name_heading] = useState("Wait... ");
-  // console.log(filteredList);
+  console.log(originalData);
   // console.log("HYYYYYYYYYYY"+useState);
   useEffect(() => {
     console.log("useEffect called");
@@ -66,6 +66,7 @@ const Body = () => {
   //   return shimmerElements;
   // }}
   const loader = useLoader(originalData.length);
+  const PromotedRestaurantCard = withPromotedRestaurantCard(RestaurantCard)//here withPromotedRestarantcard takes restraurat card and lable it with recomended and and retun a fxn to the PromotedRestaurantCard
 
   return (
     <div className="p-6">
@@ -92,24 +93,28 @@ const Body = () => {
           Top-Rated Restaurants
         </button>
       </div>
-  
+
       {/* Restaurant Cards Section */}
       <div className="res-container">
         <h2 className="text-2xl font-semibold text-gray-800 mb-4">{res_name_heading}</h2>
-  
+
         {loader()}
-  
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {filteredList.map((res) => (
             <Link key={res.info.id} to={`/restraunts/${res.info.id}`} className="block">
-              <RestaurantCard restData={res} />
+              {/* PromotedRestaurantCard is used as a componed using ternery operator condition */}
+              {res.info.avgRating > 4.3 ? (<PromotedRestaurantCard restData={res} />) :
+
+                (<RestaurantCard restData={res} />)
+              }
             </Link>
           ))}
         </div>
       </div>
     </div>
   );
-  
+
 }
 
 
