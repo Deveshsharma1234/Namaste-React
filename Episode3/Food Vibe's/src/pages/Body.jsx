@@ -81,7 +81,7 @@ const Body = () => {
         <button
           type="button"
           onClick={searchRestraunt}
-          className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 active:bg-purple-800 transition-all"
+          className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 active:bg-purple-800 transition-all cursor-pointer"
         >
           Search
         </button>

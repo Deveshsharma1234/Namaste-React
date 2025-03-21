@@ -1,4 +1,4 @@
-import React from 'react';
+  import React from 'react';
 import { USER_API } from '../utils/constants';
 
 class UserClass extends React.Component {

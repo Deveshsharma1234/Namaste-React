@@ -33,7 +33,7 @@ import { CDN_URL } from "../utils/constants";
 
 const RestaurantCard = ({ restData }) => {
   return (
-    <div className="res-card bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+    <div className="res-card bg-white rounded-lg shadow-md overflow-hidden hover:shadow-2xl transition-shadow duration-100">
       <div className="res-cont">
         <img
           src={CDN_URL + restData.info.cloudinaryImageId}
@@ -65,7 +65,7 @@ const RestaurantCard = ({ restData }) => {
 //Higher order fxn Returning updated restaurant card having Remomended on its
 export const withPromotedRestaurantCard = (RestaurantCard)=>{
   return (props)=>{
-    console.log("withPromotedRestaurantCard called",withPromotedRestaurantCard  )
+    // console.log("withPromotedRestaurantCard called",withPromotedRestaurantCard  )
     return<>
     
   <span className="absolute  bg-purple-600 text-white text-xs font-semibold px-2 py-1 rounded-md shadow-md">
