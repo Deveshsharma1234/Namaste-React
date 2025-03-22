@@ -17,7 +17,7 @@ const RestrauntsMenu = () => {
   const [search, setSearch] = useState("");
   const { resId } = useParams();
   
-  const [showIndex,setShowIndex] = useState(1);
+  const [showIndex,setShowIndex] = useState(null);
 
   const onlineStatus = useOnlineStatus();
   if (!onlineStatus) {

@@ -1,6 +1,8 @@
+import { useState } from "react";
 import User from "../components/User";
 import UserClass from "../components/UserClass";
 const About = () => {
+
     return (
         <>
           <div className="about-us bg-gray-100 p-8">
@@ -26,7 +28,7 @@ const About = () => {
               {/* Map through 5 UserClass components */}
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 {[...Array(5)].map((_, index) => (
-                  <UserClass key={index} name={"deveshsharma1234"} />
+                  <UserClass key={index} name={"deveshsharma1234"}  />
                 ))}
               </div>
             </div>

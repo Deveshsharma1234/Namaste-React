@@ -19,6 +19,7 @@ const Header = () => {
   return (
     <div className="flex justify-between items-center px-6 py-4 bg-gray-900 text-white shadow-md">
       {  /* Logo Section */}
+      <Link to={"/"}>
       <div className="flex items-center justify-center relative">
         <div className="relative group">
           <img
@@ -33,6 +34,7 @@ const Header = () => {
           </div>
         </div>
       </div>
+      </Link>
       <div className="flex">
         <ul className="flex space-x-6 text-lg">
           <li className="font-semibold">
