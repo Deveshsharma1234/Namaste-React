@@ -5,6 +5,8 @@ import { useEffect } from 'react';
 import Shimmer from "../components/Shimmer";
 import { Link } from "react-router-dom";
 import { useLoader } from "../utils/useLoader";
+import userContext from "../utils/userContext";
+import { useContext } from "react";
 // import resList from '../utils/mockData';
 
 
@@ -67,6 +69,9 @@ const Body = () => {
   // }}
   const loader = useLoader(originalData.length);
   const PromotedRestaurantCard = withPromotedRestaurantCard(RestaurantCard)//here withPromotedRestarantcard takes restraurat card and lable it with recomended and and retun a fxn to the PromotedRestaurantCard
+  const { loggedInUser,setUserInfo } = useContext(userContext);
+
+
 
   return (
     <div className="p-6">
@@ -92,6 +97,17 @@ const Body = () => {
         >
           Top-Rated Restaurants
         </button>
+        <input
+          type="text"
+          className="p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all w-full md:w-1/3"
+          placeholder="Update user name.."
+          value={loggedInUser}
+          onChange={(e) => {
+            console.log(e.target.value);
+            setUserInfo(e.target.value);
+          }}
+        />
+
       </div>
 
       {/* Restaurant Cards Section */}
@@ -104,7 +120,7 @@ const Body = () => {
           {filteredList.map((res) => (
             <Link key={res.info.id} to={`/restraunts/${res.info.id}`} className="block">
               {/* PromotedRestaurantCard is used as a componed using ternery operator condition */}
-              {res.info.avgRating > 4.3 ? (<PromotedRestaurantCard restData={res} />) :
+              {res.info.avgRating > 4.3 ? (< PromotedRestaurantCard restData={res} />) :
 
                 (<RestaurantCard restData={res} />)
               }
@@ -124,82 +140,3 @@ const Body = () => {
 
 export default Body;
 
-
-// import RestaurantCard from './RestaurantCard';
-// import { useState } from 'react';
-// import resList from '../utils/mockData';
-
-// const Body = () => {
-//   const [filteredList, setFilteredList] = useState(resList);
-
-//   const handleFilter = () => {
-//     console.log("Button clicked");
-//     const listFilter = resList.filter((res) => res.info.avgRating > 4);
-//     setFilteredList(listFilter);
-//   };
-
-//   return (
-//     <div className="body">
-//       <div className="search-bar">
-//         <input type="text" placeholder="Search for a restaurant..." />
-//         <button type="button">Search</button>
-//         <div className="filter">
-//           <button type="button" className="filter-btn" onClick={handleFilter}>
-//             Top-Rated Restaurants
-//           </button>
-//         </div>
-//       </div>
-
-//       <div className="res-container">
-//         {filteredList.length > 0 ? (
-//           filteredList.map((res) => (
-//             <RestaurantCard key={res.info.id} restData={res} />
-//           ))
-//         ) : (
-//           <p>No restaurants found</p>
-//         )}
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Body;
-// import { useState } from "react";
-// import RestaurantCard from "./RestaurantCard";
-// import resList from "../utils/mockData";
-
-// const Body = () => {
-//   const [allRestaurants, setAllRestaurants] = useState(resList); // Store original data
-//   const [filteredList, setFilteredList] = useState(resList);
-
-//   const handleFilter = () => {
-//     console.log("Button clicked"); // Debugging
-//     const listFilter = allRestaurants.filter((res) => res.info.avgRating > 4);
-//     console.log("Filtered List:", listFilter); // Check if filtering works
-//     setFilteredList(listFilter);
-//   };
-
-//   return (
-//     <div className="body">
-//       <div className="search-bar">
-//         <input type="text" placeholder="Search for a restaurant..." />
-//         <button type="button">Search</button>
-//         <div className="filter">
-//           <button type="button" className="filter-btn" onClick={handleFilter}>
-//             Top-Rated Restaurants
-//           </button>
-//         </div>
-//       </div>
-
-//       <div className="res-container">
-//         {filteredList.length > 0 ? (
-//           filteredList.map((res) => <RestaurantCard key={res.info.id} restData={res} />)
-//         ) : (
-//           <p>No restaurants found</p>
-//         )}
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Body;

@@ -1,4 +1,4 @@
-import React  ,{lazy,Suspense}from 'react'
+import React  ,{lazy,Suspense, useEffect, useState}from 'react'
 import ReactDOM from 'react-dom/client'
 import {createBrowserRouter, Outlet, RouterProvider} from 'react-router-dom'
 import './App.css'
@@ -10,7 +10,7 @@ import Contact from './pages/Contact'
 import Error from './components/Error'
 import RestrauntsMenu from './pages/RestrauntsMenu'
 import Shimmer from './components/Shimmer'
-// import Grocery from './components/Grocery'
+import userContext from './utils/userContext'
 
 
 const Grocery = lazy(()=>import("./components/Grocery"))
@@ -21,15 +21,28 @@ const About = lazy(()=> import("./pages/About"))
 
 
 const App = () => {
-  // fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=21.99740&lng=79.00110&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING")
-  // .then(res => res.json())
-  // .then(data => console.log(data))///Not ALLOWED CORS error
+  const[userInfo,setUserInfo] = useState("");
+  useEffect(()=>{
+    //implemet login logic or authorixation logic
+    const data = {
+      name : "Devesh Sharma",
+    }
+    setUserInfo(data.name);
+  },[])
+
   return(
+
+
+    <userContext.Provider value={{loggedInUser : userInfo , setUserInfo}}>
+
+
+   
     <div className = "App">
       <Header />
       <Outlet/>{/*Outlet willl be replased as per path   */}
    
     </div>
+    </userContext.Provider>
   )
 }
 

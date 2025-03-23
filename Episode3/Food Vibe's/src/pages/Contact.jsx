@@ -1,10 +1,14 @@
-import { UNSAFE_getPatchRoutesOnNavigationFunction } from "react-router-dom";
+import { useContext } from "react";
+import userContext from "../utils/userContext";
 
 const Contact = ()=>{
+    const {loggedInUser} = useContext(userContext);
     return(
         <>
+        
         <div className="contact">
-            Hello this is contact 
+            Hello this is contact  form
+            <h1>you can directly send msg or query using form to develeoper  : <b><i> {loggedInUser}</i></b></h1>
 
         </div>
         <div className="para">
