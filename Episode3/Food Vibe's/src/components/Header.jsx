@@ -3,6 +3,7 @@ import { useState, useEffect ,useContext } from "react";
 import { Link } from "react-router-dom";
 import { useOnlineStatus } from "../utils/useOnlineStatus";
 import userContext from "../utils/userContext";
+import { FaCartShopping } from "react-icons/fa6";
 
 const Header = () => {
   const [log, setLog] = useState("Login");
@@ -58,13 +59,15 @@ const Header = () => {
             </Link>
           </li>
           <li>
-            <Link to="/cart" className="hover:text-purple-400 transition duration-300">
-              Cart
+          <Link to="/grocery" className="hover:text-purple-400 transition duration-300">
+              Grocery
             </Link>
           </li>
           <li>
-            <Link to="/grocery" className="hover:text-purple-400 transition duration-300">
-              Grocery
+           
+            <Link to="/cart" className="hover:text-purple-400 transition duration-300">
+            <FaCartShopping className="hover:scale-110 transition-transform duration-200" size={30} />
+
             </Link>
           </li>
         </ul>
