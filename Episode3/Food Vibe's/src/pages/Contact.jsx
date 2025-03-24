@@ -1,7 +1,10 @@
 import { useContext } from "react";
 import userContext from "../utils/userContext";
+import { useSelector } from "react-redux";
 
 const Contact = ()=>{
+    const userInfo = useSelector((state)=> state.aut    )
+    console.log(userInfo)
     const {loggedInUser} = useContext(userContext);
     return(
         <>
@@ -9,6 +12,11 @@ const Contact = ()=>{
         <div className="contact">
             Hello this is contact  form
             <h1>you can directly send msg or query using form to develeoper  : <b><i> {loggedInUser}</i></b></h1>
+
+        </div>
+        <div className="contact">
+            Hello this is contact  form
+            <h1>you can directly send msg or query using form to develeoper </h1> <h1><b>Using React-Redux Tool Kit  :<i> {userInfo.name}</i></b></h1>
 
         </div>
         <div className="para">

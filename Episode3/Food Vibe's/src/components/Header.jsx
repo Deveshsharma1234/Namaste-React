@@ -1,9 +1,10 @@
 import { LOGO_URL } from "../utils/constants";
-import { useState, useEffect ,useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { useOnlineStatus } from "../utils/useOnlineStatus";
 import userContext from "../utils/userContext";
 import { FaCartShopping } from "react-icons/fa6";
+import { useSelector } from "react-redux";
 
 const Header = () => {
   const [log, setLog] = useState("Login");
@@ -17,7 +18,10 @@ const Header = () => {
   };
 
   const isOnline = useOnlineStatus();
-  const {loggedInUser} = useContext(userContext);
+  const { loggedInUser } = useContext(userContext);
+
+  const cartItems = useSelector((state) => state.cart.items)
+  console.log(cartItems)
 
   return (
     <div className="flex justify-between items-center px-6 py-4 bg-gray-900 text-white shadow-md">
@@ -59,41 +63,41 @@ const Header = () => {
             </Link>
           </li>
           <li>
-          <Link to="/grocery" className="hover:text-purple-400 transition duration-300">
+            <Link to="/grocery" className="hover:text-purple-400 transition duration-300">
               Grocery
             </Link>
           </li>
           <li>
-           
-            <Link to="/cart" className="hover:text-purple-400 transition duration-300">
-            <FaCartShopping className="hover:scale-110 transition-transform duration-200" size={30} />
 
+            <Link to="/cart" className="flex hover:text-purple-400 transition duration-300">
+              <FaCartShopping className="mx-2 hover:scale-110 transition-transform duration-200" size={30} />
+              <div className="text-green-400">{cartItems.length >0 &&cartItems.length}
+              </div>
             </Link>
           </li>
         </ul>
       </div>
 
       <div className="flex items-center space-x-4">
-  <span className="text-white font-medium">
-    {log === "Logout" ? loggedInUser : "First Login"}
-  </span>
+        <span className="text-white font-medium">
+          {log === "Logout" ? loggedInUser : "First Login"}
+        </span>
 
-  {/* Login Button */}
-  <Link to="/about-us">
-    <button
-      className={`px-4 py-2 rounded-lg font-semibold transition duration-300 ${
-        log === "Login"
-          ? "bg-purple-600 hover:bg-purple-500"
-          : "bg-red-600 hover:bg-red-500"
-      }`}
-      onClick={handleLoging}
-    >
-      {log}
-    </button>
-  </Link>
-</div>
+        {/* Login Button */}
+        <Link to="/about-us">
+          <button
+            className={`px-4 py-2 rounded-lg font-semibold transition duration-300 ${log === "Login"
+                ? "bg-purple-600 hover:bg-purple-500"
+                : "bg-red-600 hover:bg-red-500"
+              }`}
+            onClick={handleLoging}
+          >
+            {log}
+          </button>
+        </Link>
+      </div>
 
-     
+
     </div>
   );
 };

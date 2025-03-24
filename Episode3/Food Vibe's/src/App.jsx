@@ -11,6 +11,9 @@ import Error from './components/Error'
 import RestrauntsMenu from './pages/RestrauntsMenu'
 import Shimmer from './components/Shimmer'
 import userContext from './utils/userContext'
+import { Provider } from 'react-redux'
+import appStore from './utils/redux/appStore'
+import CartItems from './components/cartItems'
 
 
 const Grocery = lazy(()=>import("./components/Grocery"))
@@ -32,7 +35,7 @@ const App = () => {
 
   return(
 
-
+<Provider  store={appStore}> {/*Here provider from react redux takes store as a prop to link of app store to the application */}
     <userContext.Provider value={{loggedInUser : userInfo , setUserInfo}}>
 
 
@@ -43,6 +46,7 @@ const App = () => {
    
     </div>
     </userContext.Provider>
+    </Provider>
   )
 }
 
@@ -86,6 +90,10 @@ const appRouter = createBrowserRouter([
         }> <Grocery/></Suspense>
 
       },
+      {
+        path: "/cart",
+        element : <CartItems/>
+      }
 
     ],
     errorElement:  <Error/>
