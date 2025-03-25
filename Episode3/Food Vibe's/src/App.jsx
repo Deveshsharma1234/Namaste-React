@@ -13,11 +13,12 @@ import Shimmer from './components/Shimmer'
 import userContext from './utils/userContext'
 import { Provider } from 'react-redux'
 import appStore from './utils/redux/appStore'
-import CartItems from './components/cartItems'
+import CartItems from './components/CartItems'
 
 
 const Grocery = lazy(()=>import("./components/Grocery"))
 const About = lazy(()=> import("./pages/About"))
+
 
 
 
