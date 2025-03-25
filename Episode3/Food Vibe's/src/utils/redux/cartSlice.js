@@ -29,9 +29,11 @@ const cartSlice = createSlice({
             // state.items.pop();
         },
         clearItem:(state,action)=>{
-            // state.items = [];we cannot do this
+            // state = [];
+            // we cannot do this but i am able to this
             // console.log("Removing item with id:", id);
-            state.items.length=0;
+            // state.items = [];//will work as we are mutating the state
+            state.items.length=0;//valid
              window.localStorage.removeItem("cart"); 
 
         }

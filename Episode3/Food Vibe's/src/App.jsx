@@ -13,7 +13,8 @@ import Shimmer from './components/Shimmer'
 import userContext from './utils/userContext'
 import { Provider } from 'react-redux'
 import appStore from './utils/redux/appStore'
-import CartItems from './components/CartItems'
+
+// import Cart from './pages/Cart'
 
 
 const Grocery = lazy(()=>import("./components/Grocery"))
@@ -22,7 +23,7 @@ const About = lazy(()=> import("./pages/About"))
 
 
 
-
+const Cart = lazy(()=>import("./pages/Cart"))
 
 const App = () => {
   const[userInfo,setUserInfo] = useState("");
@@ -93,7 +94,7 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "/cart",
-        element : <CartItems/>
+        element :<Suspense fallback={<>Hello this is lazy loading</>}><Cart></Cart></Suspense>
       }
 
     ],

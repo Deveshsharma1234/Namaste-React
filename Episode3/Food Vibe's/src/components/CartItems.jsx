@@ -6,7 +6,7 @@ import { removeItem } from "../utils/redux/cartSlice";
 
 
 
-const CartItems = (props) => {
+const CartItems = () => {
     const items = useSelector((state) => state.cart.items);//to get items!!!
     console.log("in cartItems : ", items)
     const dispatch = useDispatch();

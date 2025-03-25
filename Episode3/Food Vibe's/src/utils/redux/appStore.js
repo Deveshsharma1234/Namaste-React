@@ -6,7 +6,7 @@
     const appStore = configureStore({
         reducer :{
             cart : cartReducer,
-            aut : authReducer
+            auth : authReducer
         }
     })
 
