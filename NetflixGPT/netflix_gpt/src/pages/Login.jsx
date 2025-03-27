@@ -1,21 +1,22 @@
 import React, { useRef, useState } from 'react';
 import Header from '../components/Header';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { checkValidData } from '../utils/validate';
 import { ToastContainer, toast } from 'react-toastify';
-import { createUserWithEmailAndPassword } from "firebase/auth";//from firebase
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";//from firebase
 import { auth } from '..//utils/firebaseConfig';
+
 
 const Login = () => {
     const [isSignInForm, setIsSignInForm] = useState(true)
     const email = useRef(null);
     const password = useRef(null);
     const name = useRef(null);
+    const navigate = useNavigate();
 
 
-    const toggleSignIn = () => {
-        setIsSignInForm(!isSignInForm);
-    }
+    const toggleSignIn = () => setIsSignInForm(!isSignInForm);
+
     const handleClick = () => {
         //Validate the form data
         const isValid = checkValidData(name.current?.value || "", email.current.value, password.current.value, isSignInForm)
@@ -39,7 +40,7 @@ const Login = () => {
         //     closeOnClick: true,
         //     pauseOnHover: true,
         //     draggable: true,
-        //     theme: "dark"
+        //     theme: "Dark"
         // });
 
         console.log("Form submitted successfully!");
@@ -50,15 +51,15 @@ const Login = () => {
                 .then((userCredential) => {
                     // Signed up 
                     const user = userCredential.user;
-                    toast.success("Sign Up as"+ user.email+"is Succesfull",{
+                    toast.success("Sign Up as" + user.email + "is Succesfull", {
                         position: "top-right",
                         autoClose: 5000,
-                        hideProgressBar:false,
-                        closeOnClick:true,
-                        pauseOnHover:true,
-                        draggable:true,
-                        theme:"dark"
-                        
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        theme: "dark"
+
                     })
                     console.log(user)
                 })
@@ -75,15 +76,48 @@ const Login = () => {
                         theme: "dark"
                     });
                     console.log(errorCode, errorMessage)
+                });
+
+
+        } else {
+            signInWithEmailAndPassword(auth, email.current.value, password.current.value)
+                .then((userCredential) => {
+                    // Signed in 
+                    const user = userCredential.user;
+                    console.log(user)
+                    toast.success("Sign in as" + user.email + "is Succesfull", {
+                        position: "top-center",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        pauseOnHover: true,
+                        draggable: 'touch',
+                        theme: "dark"
+
+                    })
+                   setTimeout(() => {
+                    navigate("/browse")
                     
-            });
+                   }, 5000);
+                }
+                )
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    toast.error(errorMessage, {
+                        position: "top-center",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        pauseOnHover: true,
+                        draggable: 'touch',
+                        theme: "dark"
 
-
+                    })
+                });
         }
 
     }
     return (
-        <div className="relative h-screen w-full">
+        <div className="relative h-screen w-full overflow-hidden">
             {/* Header */}
             <Header />
             <ToastContainer />
