@@ -22,7 +22,7 @@ const Header = () => {
 
 export const headerWithLogin = (Header) => {
     const navigate = useNavigate();
-    return () => {
+    return ({ setSearch }) => {
         return <>
             <ToastContainer />
             <div className="flex items-center justify-between bg-gray-900 text-white p-4 top-0 w-full z-10 sticky">
@@ -82,7 +82,12 @@ export const headerWithLogin = (Header) => {
                                     pauseOnHover: true,
                                     draggable: true,
                                 })
+                                setTimeout(
+                                    () => {
+                                        navigate("/")
 
+                                    }, 6000
+                                )
 
                             }).catch((error) => {
                                 // An error happened.

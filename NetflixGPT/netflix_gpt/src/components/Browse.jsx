@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { headerWithLogin } from './Header';
 import Header from './Header';
 
@@ -6,9 +6,10 @@ import Header from './Header';
 const Browse = () => {
 
     const HeaderWithLogin = headerWithLogin(Header);
+    const[search,setSearch] = useState("");
     return (
         <div>
-            <HeaderWithLogin/>
+            <HeaderWithLogin setSearch = {setSearch}/>
             Browse
 
 
