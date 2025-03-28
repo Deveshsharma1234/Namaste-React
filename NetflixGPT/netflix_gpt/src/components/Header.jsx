@@ -5,6 +5,7 @@ import { signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import Swal from "sweetalert2";
+import { useSelector } from "react-redux"
 
 const Header = () => {
 
@@ -22,6 +23,8 @@ const Header = () => {
 
 export const headerWithLogin = (Header) => {
     const navigate = useNavigate();
+    const user = useSelector(store => store.user)
+    console.log("usaer from header selector", user)
     return ({ setSearch }) => {
         return <>
             <ToastContainer />
@@ -55,53 +58,71 @@ export const headerWithLogin = (Header) => {
                     {/* Logout Button */}
 
                 </div>
-                <button className="text-red-400 hover:text-white p-2 rounded-lg" onClick={() => {
-
-                    Swal.fire({
-                        title: "Are you sure?",
-                        text: "You will be logged out!",
-                        icon: "warning",
-                        showCancelButton: true,
-                        confirmButtonText: "Yes, Logout!",
-                        confirmButtonColor: "#d33",
-                        cancelButtonText: "Cancel",
-                        cancelButtonColor: "#3085d6"
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            // Perform logout action
-
-                            signOut(auth).then(() => {
-                                // Sign-out successful.
-                                console.log("Sign out successful");
-
-                                toast.success("Logging out..", {
-                                    position: "top-right",
-                                    autoClose: 5000,
-                                    hideProgressBar: false,
-                                    closeOnClick: true,
-                                    pauseOnHover: true,
-                                    draggable: true,
-                                })
-                                setTimeout(
-                                    () => {
-                                        navigate("/")
-
-                                    }, 6000
-                                )
-
-                            }).catch((error) => {
-                                // An error happened.
-                            });
-                            Swal.fire("Logged out!", "You have been logged out.", "success");
-                        }
-                    });
+                <div className='flex items-center gap-2'>
+                    <h2>{!user ? "guest" : <img className='w-9 h-10 rounded-b-xl ' src={user.photoURL} alt='userIcon' onClick={() => {
+                        toast.info("Logged in as " + user.displayName, {
+                            position: "top-center",
+                            autoClose: 5000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            theme: "colored"
 
 
 
+                        })
+                    }}  />}</h2>
+                    {/* Logout Button */}
+                    <button className="text-red-400 hover:text-white p-2 rounded-lg" onClick={() => {
 
-                }}>
-                    <CiLogout size={24} />
-                </button>
+                        Swal.fire({
+                            title: "Are you sure?",
+                            text: "You will be logged out!",
+                            icon: "warning",
+                            showCancelButton: true,
+                            confirmButtonText: "Yes, Logout!",
+                            confirmButtonColor: "#d33",
+                            cancelButtonText: "Cancel",
+                            cancelButtonColor: "#3085d6"
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                // Perform logout action
+
+                                signOut(auth).then(() => {
+                                    // Sign-out successful.
+                                    console.log("Sign out successful");
+
+                                    toast.success("Logging out..", {
+                                        position: "top-right",
+                                        autoClose: 5000,
+                                        hideProgressBar: false,
+                                        closeOnClick: true,
+                                        pauseOnHover: true,
+                                        draggable: true,
+                                    })
+                                    setTimeout(
+                                        () => {
+                                            navigate("/")
+
+                                        }, 6000
+                                    )
+
+                                }).catch((error) => {
+                                    // An error happened.
+                                });
+                                Swal.fire("Logged out!", "You have been logged out.", "success");
+                            }
+                        });
+
+
+
+
+                    }}>
+                        <CiLogout size={24} />
+                    </button>
+                </div>
+
 
 
             </div>

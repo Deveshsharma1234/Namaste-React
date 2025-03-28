@@ -3,7 +3,7 @@ import Header from '../components/Header';
 import { useNavigate } from 'react-router-dom';
 import { checkValidData } from '../utils/validate';
 import { ToastContainer, toast } from 'react-toastify';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";//from firebase
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";//from firebase
 import { auth } from '..//utils/firebaseConfig';
 
 
@@ -51,17 +51,34 @@ const Login = () => {
                 .then((userCredential) => {
                     // Signed up 
                     const user = userCredential.user;
-                    toast.success("Sign Up as" + user.email + "is Succesfull", {
+                    updateProfile(user, {
+                        displayName: name.current.value, photoURL: "https://i.pravatar.cc/300"
+                    }).then(() => {
+                        // Profile updated!
+                        // ...
+                        console.log("Profile updated!")
+                        // ...
+                    }).catch((error) => {
+                        // An error occurred
+                        // ...
+                        console.log(error)
+                    });
+                    toast.success("Sign Up as" + user.displayName + "is Succesfull", {
                         position: "top-right",
                         autoClose: 5000,
                         hideProgressBar: false,
                         closeOnClick: true,
                         pauseOnHover: true,
                         draggable: true,
-                        theme: "dark"
+                        theme: "dark",
+
 
                     })
                     console.log(user)
+                    setTimeout(() => {
+                        navigate("/browse")
+                    }, 3000);
+
                 })
                 .catch((error) => {
                     const errorCode = error.code;
@@ -85,6 +102,8 @@ const Login = () => {
                     // Signed in 
                     const user = userCredential.user;
                     console.log(user)
+                    //here we save user in redux store
+
                     toast.success("Sign in as" + user.email + "is Succesfull", {
                         position: "top-center",
                         autoClose: 5000,
@@ -94,10 +113,12 @@ const Login = () => {
                         theme: "dark"
 
                     })
-                   setTimeout(() => {
-                    navigate("/browse")
-                    
-                   }, 5000);
+                    //navigate in Body.jsx using onAuthStateChanged
+                    setTimeout(() => {
+                        navigate("/browse")
+                    }, 6000);
+
+
                 }
                 )
                 .catch((error) => {
