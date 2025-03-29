@@ -6,6 +6,13 @@ import { ToastContainer, toast } from 'react-toastify';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from "firebase/auth";//from firebase
 import { auth } from '..//utils/firebaseConfig';
 
+import { addUser } from '../utils/Redux/Slices/userSlice';
+import { useDispatch } from 'react-redux';
+
+
+
+
+
 
 const Login = () => {
     const [isSignInForm, setIsSignInForm] = useState(true)
@@ -13,6 +20,8 @@ const Login = () => {
     const password = useRef(null);
     const name = useRef(null);
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+    
 
 
     const toggleSignIn = () => setIsSignInForm(!isSignInForm);
@@ -56,6 +65,14 @@ const Login = () => {
                     }).then(() => {
                         // Profile updated!
                         // ...
+
+
+                        const { uid, email, displayName, photoURL } = user;
+                        dispatch(addUser({ uid: uid, email: email, displayName: displayName, photoURL: photoURL }))
+                       
+                       
+                      
+
                         console.log("Profile updated!")
                         // ...
                     }).catch((error) => {
@@ -74,10 +91,7 @@ const Login = () => {
 
 
                     })
-                    console.log(user)
-                    setTimeout(() => {
-                        navigate("/browse")
-                    }, 3000);
+                
 
                 })
                 .catch((error) => {
@@ -114,10 +128,7 @@ const Login = () => {
 
                     })
                     //navigate in Body.jsx using onAuthStateChanged
-                    setTimeout(() => {
-                        navigate("/browse")
-                    }, 6000);
-
+               
 
                 }
                 )
