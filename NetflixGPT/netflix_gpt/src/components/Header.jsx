@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { CiLogout, CiSearch } from "react-icons/ci";
 import { auth } from '../utils/firebaseConfig';
 import { signOut } from 'firebase/auth';
@@ -11,7 +11,7 @@ import { useEffect } from 'react';
 import { onAuthStateChanged } from 'firebase/auth';
 import { memo, useCallback } from "react";
 import { LOGO } from '../utils/constants';
-
+import { Link } from 'react-router-dom';
 
 
 const Header = () => {
@@ -170,9 +170,10 @@ const Header = () => {
 
 // }
 export const headerWithLogin = (Header) => {
-    return memo(({ setSearch }) => {
+    return memo(() => {
         const user = useSelector((store) => store.user);
         console.log("User from header selector:", user);
+     
 
         const handleLogout = useCallback(() => {
             Swal.fire({
@@ -216,7 +217,7 @@ export const headerWithLogin = (Header) => {
 
                     {/* Navigation Links */}
                     <ul className="flex gap-6 text-lg">
-                        <li className="hover:text-purple-400 cursor-pointer">Home</li>
+                       <Link to={"/browse"}  > <li className="hover:text-purple-400 cursor-pointer">Home</li></Link>
                         <li className="hover:text-purple-400 cursor-pointer">Service</li>
                         <li className="hover:text-purple-400 cursor-pointer">Movies</li>
                         <li className="hover:text-purple-400 cursor-pointer">Original</li>
@@ -227,6 +228,7 @@ export const headerWithLogin = (Header) => {
                     {/* Search Box */}
                     <div className="flex items-center bg-gray-800 rounded-lg px-3 py-1">
                         <input
+                        
                             type="text"
                             name="search"
                             id="search"

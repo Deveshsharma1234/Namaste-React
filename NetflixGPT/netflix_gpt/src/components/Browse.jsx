@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { headerWithLogin } from './Header';
 import Header from './Header';
-import useGetNowPlayingMovies from '../Hooks/APT_FETCHED_DATA/useGetNowPlayingMovies';
+import useGetAllMoviesCategories from '../Hooks/APT_FETCHED_DATA/useGetAllMoviesCategories';
 import FirstContainer from './FirstContainer';
 import SecoundContainer from "./SecoundContainer"
 const Browse = () => {
@@ -10,14 +10,14 @@ const Browse = () => {
 
     const HeaderWithLogin = headerWithLogin(Header);
     const [search, setSearch] = useState("");
-
+console.log("search from browse",search)
    //calling custom hook to store get nowplayingmovies data in redux store
-    useGetNowPlayingMovies()
+   useGetAllMoviesCategories()
 
 
 
     return (
-        <div>
+        <div >
             <HeaderWithLogin setSearch={setSearch} />
             <FirstContainer/>
             <SecoundContainer/>

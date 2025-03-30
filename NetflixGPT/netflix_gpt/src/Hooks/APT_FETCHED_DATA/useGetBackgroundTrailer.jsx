@@ -12,9 +12,16 @@ const useGetBackgroundTrailer = (id)=>{
             const trailer = await fetch(`https://api.themoviedb.org/3/movie/${id}/videos?language=en-US`, API_OPTIONS)
             const trailerJson = await trailer.json();
         
-            const filterTrailerVides = trailerJson.results.filter((video)=>video.type === "Trailer");
+            const filterTrailerVideos = trailerJson.results.filter((video)=>video.type === "Trailer");
           
-            const trailerVideo = filterTrailerVides.length? filterTrailerVides[0]: trailerJson.results[0];
+          
+        // Pick a random trailer if available, else pick any video
+        const trailerVideo =
+        filterTrailerVideos.length > 0 
+            ? filterTrailerVideos[Math.floor(Math.random() * filterTrailerVideos.length)] 
+            : trailerJson.results.length > 0 
+            ? trailerJson.results[Math.floor(Math.random() * trailerJson.results.length)] 
+            : null;
             console.log("trailerVideo : ",trailerVideo);
            dispatch(addTrailer(trailerVideo))
             // setTrailer(trailerVideo);
