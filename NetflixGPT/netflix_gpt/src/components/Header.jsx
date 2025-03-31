@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+
 import { CiLogout, CiSearch } from "react-icons/ci";
 import { auth } from '../utils/firebaseConfig';
 import { signOut } from 'firebase/auth';
@@ -12,6 +12,8 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { memo, useCallback } from "react";
 import { LOGO } from '../utils/constants';
 import { Link } from 'react-router-dom';
+import { addGpt,removeGpt } from "../utils/Redux/Slices/gptSlice";
+import GPTSearchBar from "./GPT_SearchBar";
 
 
 const Header = () => {
@@ -172,6 +174,8 @@ const Header = () => {
 export const headerWithLogin = (Header) => {
     return memo(() => {
         const user = useSelector((store) => store.user);
+        const isTrue = useSelector((store)=> store.gpt.isTrue);
+        const dispatch = useDispatch();
         console.log("User from header selector:", user);
      
 
@@ -202,14 +206,24 @@ export const headerWithLogin = (Header) => {
                         .catch((error) => {
                             console.error("Logout error:", error);
                         });
-
-                    Swal.fire("Logged out!", "You have been logged out.", "success");
-                }
-            });
-        }, []);
-
-        return (
-            <>
+                        
+                        Swal.fire("Logged out!", "You have been logged out.", "success");
+                    }
+                });
+            }, []);
+            
+            const   handleAIRecomendation = ()=>{
+                console.log("Before Dispatch - isTrue:", isTrue); // Check current state
+                dispatch(isTrue ? removeGpt() : addGpt());
+                setTimeout(() => {
+                    console.log("After Dispatch - isTrue:", isTrue); // Check updated state
+                }, 100); // Allow time for Redux update
+            
+                
+                
+            }
+            return (
+                <>
                 <ToastContainer />
                 <div className="flex items-center justify-between bg-gray-900 text-white p-4 top-0 w-full z-10 sticky">
                     {/* Header */}
@@ -219,14 +233,14 @@ export const headerWithLogin = (Header) => {
                     <ul className="flex gap-6 text-lg">
                        <Link to={"/browse"}  > <li className="hover:text-purple-400 cursor-pointer">Home</li></Link>
                         <li className="hover:text-purple-400 cursor-pointer">Service</li>
-                        <li className="hover:text-purple-400 cursor-pointer">Movies</li>
+                        <li className="hover:text-purple-400 cursor-pointer" onClick={handleAIRecomendation}>AI recomendation</li>
                         <li className="hover:text-purple-400 cursor-pointer">Original</li>
                         <li className="hover:text-purple-400 cursor-pointer">Recently Added</li>
                         <li className="hover:text-purple-400 cursor-pointer">My List</li>
                     </ul>
 
                     {/* Search Box */}
-                    <div className="flex items-center bg-gray-800 rounded-lg px-3 py-1">
+                    {/* <div className="flex items-center bg-gray-800 rounded-lg px-3 py-1">
                         <input
                         
                             type="text"
@@ -238,7 +252,8 @@ export const headerWithLogin = (Header) => {
                         <button className="text-purple-400 hover:text-white">
                             <CiSearch size={20} />
                         </button>
-                    </div>
+                    </div> */}
+                    <GPTSearchBar/>
 
                     {/* User Profile & Logout */}
                     <div className="flex items-center gap-2">

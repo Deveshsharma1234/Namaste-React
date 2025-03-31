@@ -1,5 +1,7 @@
 import React from 'react';
 import { CDN_URI } from '../utils/constants';
+import {AiOutlinePercentage}from 'react-icons/ai';
+
 
 const MovieCards = ({movie}) => {
     console.log("Movie cards",movie);
@@ -21,7 +23,7 @@ const MovieCards = ({movie}) => {
                 <p className="text-sm opacity-80">{overview.slice(0, 100)}...</p>
                 <div className="flex justify-between items-center mt-2">
                     <p className="text-xs bg-gray-800 px-2 py-1 rounded">{release_date}</p>
-                    <p className="text-xs bg-yellow-500 px-2 py-1 rounded">{vote_average}⭐</p>
+                    <p className="flex items-center text-xs  px-2 py-1 rounded bg-green-300 text-black`">{(vote_average*10).toPrecision(2)}<AiOutlinePercentage /></p>
                 </div>
                 <p className="text-xs mt-2">Votes: {vote_count}</p>
                 <p className="text-xs">Language: {original_language.toUpperCase()}</p>

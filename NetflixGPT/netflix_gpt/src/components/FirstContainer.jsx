@@ -4,6 +4,7 @@ import {useSelector} from 'react-redux';
 import VideoBackground from './VideoBackground';
 import VideoTitle from './VideoTitle';
 
+import { useState,useEffect } from 'react';
 
 
 
@@ -16,10 +17,16 @@ const movies = useSelector(store => [
   ...(store.movie?.popularMovies || []),
   ...(store.movie?.upComingMovies || [])
 ]);
-if(!movies.length) return;//
-const mainMovie = movies[Math.floor(Math.random() * movies.length)];
-console.log( "first Container :",mainMovie);
+const [mainMovie, setMainMovie] = useState(null);
 
+// Set `mainMovie` ONLY when `movies` first load
+useEffect(() => {
+    if (movies.length > 0 && !mainMovie) {
+        setMainMovie(movies[Math.floor(Math.random() * movies.length)]);
+    }
+}, [movies]); // Runs only when `movies` change
+
+if (!mainMovie) return null; // Prevent rendering before selection
 
     return (
         <>
