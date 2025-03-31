@@ -4,7 +4,7 @@ import {AiOutlinePercentage}from 'react-icons/ai';
 
 
 const MovieCards = ({movie}) => {
-    console.log("Movie cards",movie);
+    // console.log("Movie cards",movie);
     const {id,overview,original_title,poster_path,title,release_date,vote_average,vote_count,original_language} = movie;
     return (
         <div className="relative w-80 h-96 rounded-lg overflow-hidden shadow-lg">

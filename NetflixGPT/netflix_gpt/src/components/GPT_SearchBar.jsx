@@ -1,25 +1,22 @@
 import React, { useRef } from 'react';
 import { CiSearch } from 'react-icons/ci';
-import client from "../utils/OpenAI/openAI"
-import { API_OPTIONS } from '../utils/constants';
-import { debugErrorMap } from 'firebase/auth';
+
 import { useDispatch } from 'react-redux';
 import { addGptRecomendedMovies } from '../utils/Redux/Slices/gptSlice';
+import { searchMovieInTmdb } from '../Hooks/APT_FETCHED_DATA/searchMovieInTmdb';
+
 const GPTSearchBar = () => {
     const dispatch = useDispatch();
     const searchText = useRef(null);
-
-    //Search movie in tmdb;
-    const searchMovieInTmdb = async(movieName)=>{
-        const movieData = await fetch(`https://api.themoviedb.org/3/search/movie?query=${movieName}&include_adult=false&language=en-US&page=1`, API_OPTIONS);
-      const movieJSON = await movieData.json();
-      return movieJSON.results;
-    }
-
+    // const searchMovieInTmdb = async(movieName)=>{
+    //     const movieData = await fetch(`https://api.themoviedb.org/3/search/movie?query=${movieName}&include_adult=false&language=en-US&page=1`, API_OPTIONS);
+    //   const movieJSON = await movieData.json();
+    //   return movieJSON.results;
+    // }
     const handleGPTSearch = async()=>{
-        console.log(searchText.current.value);
+   
         // make an api call to get the response from the GPT
-        let query = `Work as a movie recomendation system and provide 5 comma separated movie names based on ${searchText.current.value}`
+        // let query = `Work as a movie recomendation system and provide 5 comma separated movie names based on ${searchText.current.value}`
         // const completion = await client.chat.completions.create({
         //     // model: 'gpt-3.5-turbo',
         //     model: 'gpt-4o',
@@ -33,7 +30,11 @@ const GPTSearchBar = () => {
         //   console.log(completion.choices[0].message.content);
           //this will give array of movie using split(',')
         //   const gptMovies = completion.choices[0].message.content.split(',')
-        const gptMovies = "Andaz Apna Apna,Hera Pheri,Chupke Chupke".split(`,`);
+        const gptMovies = "Andaz Apna Apna,Hera Pheri,Chupke Chupke".split(`,`)
+        // const gptMovies = "Andaz Apna Apna,Hera Pheri,Chupke Chupke,Dhol,Bhagam Bhag,Golmaal,Fukrey,Welcome,3 Idiots,Dhamaal,Phir Hera Pheri,Golmaal Returns,Golmaal 3,Malamaal Weekly,De Dana Dan,Chennai Express,Bol Bachchan,Housefull,Housefull 2,Housefull 3,Housefull 4,Partner,No Entry,Heyy Babyy,Total Dhamaal,Mujhse Shaadi Karogi,Judwaa,Judwaa 2,Main Tera Hero,Badlapur,PK,Lage Raho Munna Bhai,Munna Bhai MBBS,Bhool Bhulaiyaa,Bhool Bhulaiyaa 2,Khatta Meetha,Tees Maar Khan,Desi Boyz,Dostana,Dostana 2,Garam Masala,Mr. India,Sholay,Don,Don 2,Raees,Pathaan,Jawan,War,KGF,Kabir Singh,Animal,Gadar,Gadar 2,Border,Lagaan,Swades,Chak De India,Tanhaji,Bajirao Mastani,Padmaavat,Ram-Leela,Sanju,Rang De Basanti,Zindagi Na Milegi Dobara,Rockstar,Jab We Met,Tamasha,Yeh Jawaani Hai Deewani,Ae Dil Hai Mushkil,Barfi!,Kal Ho Naa Ho,Kabhi Khushi Kabhie Gham,Kabhi Alvida Naa Kehna,Dilwale Dulhania Le Jayenge,Mohabbatein,Kaho Naa Pyaar Hai,Koi Mil Gaya,Krrish,Krrish 3,Bang Bang,Brahmāstra,Ra.One,Robot,2.0,Bhavesh Joshi Superhero,Gangs of Wasseypur,Drishyam,Drishyam 2,Kahaani,Kahaani 2,Special 26,A Wednesday,Article 15,Badla,Andhadhun,Johnny Gaddaar,Gangubai Kathiawadi,Queen,Tanu Weds Manu,Tanu Weds Manu Returns,Bareilly Ki Barfi,Bala,Stree,Luka Chuppi,Mimi".split(`,`);
+
+        // 
+        // ;//Hard coded response
         //   console.log(gptMovies);
 
           //for each movie i will call tmdb api
@@ -44,36 +45,20 @@ const GPTSearchBar = () => {
           })
         //   [promise , promise, promise....]
         const tmdbMovies = await Promise.all(gptMoviesPromise);
-        console.log(tmdbMovies);
         dispatch(addGptRecomendedMovies(tmdbMovies));
-
+        
+        setTimeout(() => {
+            console.log(tmdbMovies)
+        },5000 );
 
 
 
     }
     return (
         <form  onSubmit={e=> e.preventDefault()} className="flex items-center max-w-lg  p-4 ">
-            {/* <div className="relative w-full">
-                <input
-                    type="text"
-                    placeholder="Search..."
-                    className="w-full p-2 pl-10 border rounded-lg focus:ring-blue-500 focus:border-blue-500"
-                />
-                <span className="absolute left-3 top-2.5 text-gray-500">
-                    🔍
-                </span>
-            </div>
-            <button                type="submit"
-                className="ml-2 px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700"
-            >
-                Search
-            </button> */}
-
-            {/* ------------------------------------- */}
             <div className="flex items-center bg-gray-800 rounded-lg px-3 py-1">
                 <input
                 ref={searchText}
-
                     type="text"
                     name="search"
                     id="search"

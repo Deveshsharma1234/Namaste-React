@@ -10,6 +10,7 @@ import { useSelector } from 'react-redux';
 
 const Browse = () => {
     const isTrue = useSelector(store => store.gpt.isTrue)
+    const simpleSearch = useSelector(store => store.search)
 
     const HeaderWithLogin = headerWithLogin(Header);
     const [search, setSearch] = useState("");

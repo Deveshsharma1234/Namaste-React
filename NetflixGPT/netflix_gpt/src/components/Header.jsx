@@ -13,7 +13,10 @@ import { memo, useCallback } from "react";
 import { LOGO } from '../utils/constants';
 import { Link } from 'react-router-dom';
 import { addGpt,removeGpt } from "../utils/Redux/Slices/gptSlice";
-import GPTSearchBar from "./GPT_SearchBar";
+import { useRef } from "react";
+import {searchMovieInTmdb} from '../Hooks/APT_FETCHED_DATA/searchMovieInTmdb';
+import { setSearch } from "../utils/Redux/Slices/searchSlice";
+
 
 
 const Header = () => {
@@ -32,7 +35,14 @@ const Header = () => {
                 const uid = user.uid;
                 const { email, displayName, photoURL } = user;
                 dispatch(addUser({ uid: uid, email: email, displayName: displayName, photoURL: photoURL }))
-                  navigate("/browse")
+                const currentPath = window.location.pathname; 
+
+                if (currentPath === "/search") {
+                    navigate("/search"); 
+                }
+               else if(currentPath==="/")
+                navigate("/browse")
+                
                 // ...
             } else {
                 // User is signed out
@@ -176,8 +186,21 @@ export const headerWithLogin = (Header) => {
         const user = useSelector((store) => store.user);
         const isTrue = useSelector((store)=> store.gpt.isTrue);
         const dispatch = useDispatch();
-        console.log("User from header selector:", user);
-     
+        const navigate = useNavigate();
+
+    
+        const search = useRef();    
+        
+     const handleSimpleSearch = async()=>{
+        if(search.current?.value===""){
+            toast.error("Please enter a search term")   
+        }else{
+            const movieJson = await searchMovieInTmdb(search.current?.value);
+        console.log("Movie JSON:", movieJson);
+        dispatch(setSearch(movieJson));
+        navigate("/search")
+        }
+     }
 
         const handleLogout = useCallback(() => {
             Swal.fire({
@@ -240,20 +263,20 @@ export const headerWithLogin = (Header) => {
                     </ul>
 
                     {/* Search Box */}
-                    {/* <div className="flex items-center bg-gray-800 rounded-lg px-3 py-1">
+                    <div className="flex items-center bg-gray-800 rounded-lg px-3 py-1">
                         <input
-                        
+                        ref={search}
                             type="text"
                             name="search"
                             id="search"
                             placeholder="Search"
                             className="bg-transparent outline-none text-white placeholder-gray-400 px-2"
                         />
-                        <button className="text-purple-400 hover:text-white">
+                        <button className="text-purple-400 hover:text-white" onClick={handleSimpleSearch}>
                             <CiSearch size={20} />
                         </button>
-                    </div> */}
-                    <GPTSearchBar/>
+                    </div>
+                    {/* <GPTSearchBar/> */}
 
                     {/* User Profile & Logout */}
                     <div className="flex items-center gap-2">

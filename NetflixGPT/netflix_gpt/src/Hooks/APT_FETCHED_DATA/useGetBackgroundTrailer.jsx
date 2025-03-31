@@ -22,7 +22,7 @@ const useGetBackgroundTrailer = (id)=>{
             : trailerJson.results.length > 0 
             ? trailerJson.results[Math.floor(Math.random() * trailerJson.results.length)] 
             : null;
-            console.log("trailerVideo : ",trailerVideo);
+            // console.log("trailerVideo : ",trailerVideo);
            dispatch(addTrailer(trailerVideo))
             // setTrailer(trailerVideo);
         }
