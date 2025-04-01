@@ -13,7 +13,7 @@ export  const appRouter = createBrowserRouter([
       children:[
         {
           path: "/",
-          element :  <ProtectedRouter element={<Home/>}/>
+          element : <Home/>
         },
         {
           path:"/login",

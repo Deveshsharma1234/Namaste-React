@@ -5,7 +5,7 @@ const Error = () => {
    
     return (
         <div>
-            You have entered wrong url please check!!!!!!
+           ⚠️⚠️⚠️⚠️ Ohhh.. Something wrong ⚠️⚠️⚠️⚠️
       <Link to={"/"}> <h1><b><i>Click to go Home page</i></b></h1></Link>
         </div>
     );
